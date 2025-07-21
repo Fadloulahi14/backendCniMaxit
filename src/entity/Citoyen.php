@@ -25,14 +25,14 @@ class Citoyen
         $this->copie_url = $copie_url;
     }
 
-    // public function toArray(): array {
-    //     return [
-    //         'nci' => $this->nci,
-    //         'nom' => $this->nom,
-    //         'prenom' => $this->prenom,
-    //         'date' => $this->date_naissance,
-    //         'lieu' => $this->lieu_naissance,
-    //         'copie_url' => $this->copie_url,
-    //     ];
-    // }
+    public function toArray(): array {
+        return [
+            'nci' => $this->nci,
+            'nom' => $this->nom,
+            'prenom' => $this->prenom,
+            'date' => $this->date_naissance,
+            'lieu' => $this->lieu_naissance,
+            'copie_url' => $this->copie_url,
+        ];
+    }
 }
