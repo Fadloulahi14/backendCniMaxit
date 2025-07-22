@@ -1,7 +1,28 @@
 {
+    "name": "falilloulahi-nd/app-da-fcode",
+    "description": "backendmaxit",
     "autoload": {
         "psr-4": {
-            "App\\": "AppDAF/"
+            "FalilloulahiNd\\AppDaFcode\\": "src/",
+            "App\\src\\entity\\":"src/entity",
+            "App\\src\\controller\\":"src/controller",
+            "App\\src\\repository\\":"src/repository",
+            "App\\src\\service\\":"src/service",
+            "App\\config\\":"app/core", 
+            "App\\core\\":"app/core/abstract"
         }
-    }
+    },
+    "authors": [
+        {
+            "name": "fadloulahi"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "scripts": {
+        "database:migrate": "php migrations/migration.php",
+        "database:seeder":"php seeders/seeder.php"
+  }
+
 }

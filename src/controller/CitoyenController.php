@@ -6,33 +6,67 @@ use App\src\service\CitoyenService;
 
 class CitoyenController
 {
-    private CitoyenService $service;
+       private CitoyenService $citoyenService;
 
     public function __construct()
     {
-        $this->service = new CitoyenService();
+        $this->citoyenService = new CitoyenService();
     }
 
-    public function rechercher(): void
+    public function findByNci(string $nci)
     {
         header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: *');
+        $citoyen = $this->citoyenService->findByNci($nci);
 
-        $nci = $_GET['nci'] ?? null;
-
-        if (!$nci) {
-            http_response_code(400);
+        if ($citoyen) {
+            http_response_code(200);
+            echo json_encode([
+                'data' => [
+                    'nci' => $citoyen->getNci(),
+                    'nom' => $citoyen->getNom(),
+                    'prenom' => $citoyen->getPrenom(),
+                    'date' => $citoyen->getDateNaissance(),
+                    'lieu' => $citoyen->getLieuNaissance(),
+                    'url_carte_recto' => $citoyen->getUrlCarteRecto(),
+                    'url_carte_verso' => $citoyen->getUrlCarteVerso(),
+                ],
+                'statut' => 'success',
+                'code' => 200,
+                'message' => "Le numéro de carte d'identité a été retrouvé"
+            ]);
+        } else {
+            http_response_code(404);
             echo json_encode([
                 'data' => null,
                 'statut' => 'error',
-                'code' => 400,
-                'message' => 'Le NCI est requis'
+                'code' => 404,
+                'message' => "Le numéro de carte d'identité non retrouvé"
             ]);
-            return;
         }
+    }
 
-        $result = $this->service->rechercherCitoyen($nci);
-        http_response_code($result['code']);
-        echo json_encode($result);
+
+    public function findAll()
+    {
+        header('Content-Type: application/json');
+        $citoyens = $this->citoyenService->findAll();
+
+        if ($citoyens) {
+            http_response_code(200);
+            echo json_encode([
+                'data' => array_map(fn($citoyen) => $citoyen->toArray(), $citoyens),
+                'statut' => 'success',
+                'code' => 200,
+                'message' => "Liste des citoyens récupérée avec succès"
+            ]);
+        } else {
+            http_response_code(404);
+            echo json_encode([
+                'data' => null,
+                'statut' => 'error',
+                'code' => 404,
+                'message' => "Aucun citoyen trouvé"
+            ]);
+        }
     }
 }

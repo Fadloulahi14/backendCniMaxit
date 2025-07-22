@@ -1,10 +1,21 @@
 <?php
-
 use App\src\controller\CitoyenController;
 
-$uri = $_SERVER['REQUEST_URI'];
 
-if (preg_match('#^/api/citoyen$#', $uri) && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    (new CitoyenController())->rechercher();
-    exit;
-}
+
+$uris = [
+    "api/citoyen/" => [
+        'controller' => CitoyenController::class,
+        'method' => 'findByNci'    
+    ],
+     "" => [
+        'controller' => CitoyenController::class,
+        'method' => 'findAll'    
+    ],
+   
+
+];
+
+
+// ['GET', '/api/citoyen/{nci}', [CitoyenController::class, 'findByNci']],
+//     ['GET', '/api/citoyens', [CitoyenController::class, 'findAll']],

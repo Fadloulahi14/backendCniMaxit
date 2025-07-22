@@ -3,33 +3,22 @@
 namespace App\src\service;
 
 use App\src\repository\CitoyenRepository;
+use App\src\entity\Citoyen;
 
 class CitoyenService
-{
-    private CitoyenRepository $repository;
+{private $citoyenRepository;
 
     public function __construct()
     {
-        $this->repository = new CitoyenRepository();
+        $this->citoyenRepository = new CitoyenRepository();
     }
 
-    public function rechercherCitoyen(string $nci): array
+    public function findByNci(string $nci): ?Citoyen
     {
-        $citoyen = $this->repository->findByNci($nci);
-        if ($citoyen) {
-            return [
-                'data' => $citoyen->toArray(),
-                'statut' => 'success',
-                'code' => 200,
-                'message' => 'Le numéro de carte d\'identité a été retrouvé'
-            ];
-        }
-
-        return [
-            'data' => null,
-            'statut' => 'error',
-            'code' => 404,
-            'message' => 'Le numéro de carte d\'identité non retrouvé'
-        ];
+        return $this->citoyenRepository->findByNci($nci);
+    }
+    public function findAll(): array
+    {
+        return $this->citoyenRepository->findAll();
     }
 }

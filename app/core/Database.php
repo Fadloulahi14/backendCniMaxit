@@ -1,25 +1,36 @@
 <?php
 
-namespace App\app\config;
+namespace App\config;
+use Dotenv\Dotenv;
 
 use PDO;
 use PDOException;
 
+
+
+
+
 class Database
 {
-    private PDO $pdo;
+    private static ?PDO $connection = null;
 
-    public function __construct()
+    public static function getInstance(): PDO
     {
-        $host = 'localhost';
-        $dbname = 'appdaf_db';
-        $user = 'user';
-        $pass = 'pass';
-        $this->pdo = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
-    }
+        if (self::$connection === null) {
+            try {
+                self::$connection = new PDO(
+                     'pgsql:host=postgres_appdaf;port=5432;dbname=appdaff', 'appdaf_user', 'secretpass',
+                    [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        PDO::ATTR_EMULATE_PREPARES => false
+                    ]
+                );
+            } catch (PDOException $e) {
+                die("Erreur de connexion à la base de données: " . $e->getMessage());
+            }
+        }
 
-    public function getConnection(): PDO
-    {
-        return $this->pdo;
+        return self::$connection;
     }
 }
