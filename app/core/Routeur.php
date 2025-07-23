@@ -1,5 +1,6 @@
 <?php
 namespace App\config;
+use  App\config\App;
 class Routeur{
    
     public static function resolve(array $routes){
@@ -21,7 +22,7 @@ class Routeur{
             } elseif ($routePattern === $uri) {
                 $controllerClass = $routeInfo['controller'];
                 $method = $routeInfo['method'];
-                $controller = new $controllerClass();
+                $controller = App::getDependency($controllerClass);
                 $controller->$method();
                 return;
             }

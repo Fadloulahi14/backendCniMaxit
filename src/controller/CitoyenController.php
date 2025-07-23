@@ -5,13 +5,15 @@ namespace App\src\controller;
 use App\src\service\CitoyenService;
 use App\src\http\Response;
 
-class CitoyenController
+class CitoyenController implements IcontrollerCitoyen
 {
     private CitoyenService $citoyenService;
 
-    public function __construct()
+    public function __construct(CitoyenService $citoyenService)
     {
-        $this->citoyenService = new CitoyenService();
+
+        $this->citoyenService = $citoyenService;
+        
     }
 
     public function findByNci(string $nci): void
@@ -19,15 +21,9 @@ class CitoyenController
         $citoyen = $this->citoyenService->findByNci($nci);
 
         if ($citoyen) {
-            Response::success([
-                'nci' => $citoyen->getNci(),
-                'nom' => $citoyen->getNom(),
-                'prenom' => $citoyen->getPrenom(),
-                'date' => $citoyen->getDateNaissance(),
-                'lieu' => $citoyen->getLieuNaissance(),
-                'url_carte_recto' => $citoyen->getUrlCarteRecto(),
-                'url_carte_verso' => $citoyen->getUrlCarteVerso(),
-            ], "Le numéro de carte d'identité a été retrouvé", 200);
+            Response::success(
+                $citoyen->toArray(),
+            "Le numéro de carte d'identité a été retrouvé", 200);
         } else {
             Response::error("Le numéro de carte d'identité non retrouvé", 404);
         }

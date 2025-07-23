@@ -1,0 +1,9 @@
+services:
+  db: App\config\Database
+  App\src\controller\CitoyenController: App\src\controller\CitoyenController
+  App\src\service\CitoyenService: App\src\service\CitoyenService
+  App\src\repository\CitoyenRepository: App\src\repository\CitoyenRepository
+
+  citoyenRepository: App\Repository\CitoyenRepository
+  # citoyenRepository: App\Repositories\CitoyenRepository
+ 

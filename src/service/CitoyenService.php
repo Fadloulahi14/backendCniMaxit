@@ -5,12 +5,12 @@ namespace App\src\service;
 use App\src\repository\CitoyenRepository;
 use App\src\entity\Citoyen;
 
-class CitoyenService
+class CitoyenService implements IserviceCitoyen
 {private $citoyenRepository;
 
-    public function __construct()
+    public function __construct(CitoyenRepository $citoyenRepository)
     {
-        $this->citoyenRepository = new CitoyenRepository();
+        $this->citoyenRepository = $citoyenRepository;
     }
 
     public function findByNci(string $nci): ?Citoyen
