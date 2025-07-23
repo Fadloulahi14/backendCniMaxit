@@ -39,6 +39,7 @@ class ComposerStaticInit7e6e5e2356f67a278a1fe379d4ed901c
         array (
             'App\\src\\service\\' => 16,
             'App\\src\\repository\\' => 19,
+            'App\\src\\http\\' => 13,
             'App\\src\\entity\\' => 15,
             'App\\src\\controller\\' => 19,
             'App\\core\\' => 9,
@@ -83,6 +84,10 @@ class ComposerStaticInit7e6e5e2356f67a278a1fe379d4ed901c
         array (
             0 => __DIR__ . '/../..' . '/src/repository',
         ),
+        'App\\src\\http\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/http',
+        ),
         'App\\src\\entity\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/entity',
@@ -107,6 +112,7 @@ class ComposerStaticInit7e6e5e2356f67a278a1fe379d4ed901c
         'App\\core\\AbtractEntity' => __DIR__ . '/../..' . '/app/core/abstract/AbtractEntity.php',
         'App\\src\\controller\\CitoyenController' => __DIR__ . '/../..' . '/src/controller/CitoyenController.php',
         'App\\src\\entity\\Citoyen' => __DIR__ . '/../..' . '/src/entity/Citoyen.php',
+        'App\\src\\http\\Response' => __DIR__ . '/../..' . '/src/http/Response.php',
         'App\\src\\repository\\CitoyenRepository' => __DIR__ . '/../..' . '/src/repository/CitoyenRepository.php',
         'App\\src\\service\\CitoyenService' => __DIR__ . '/../..' . '/src/service/CitoyenService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

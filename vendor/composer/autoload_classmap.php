@@ -11,6 +11,7 @@ return array(
     'App\\core\\AbtractEntity' => $baseDir . '/app/core/abstract/AbtractEntity.php',
     'App\\src\\controller\\CitoyenController' => $baseDir . '/src/controller/CitoyenController.php',
     'App\\src\\entity\\Citoyen' => $baseDir . '/src/entity/Citoyen.php',
+    'App\\src\\http\\Response' => $baseDir . '/src/http/Response.php',
     'App\\src\\repository\\CitoyenRepository' => $baseDir . '/src/repository/CitoyenRepository.php',
     'App\\src\\service\\CitoyenService' => $baseDir . '/src/service/CitoyenService.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',

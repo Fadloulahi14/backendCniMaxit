@@ -70,56 +70,52 @@ try {
     $pdo = new PDO($dsn, $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if ($driver === 'mysql') {
-        $tables = [
-                        "CREATE TABLE IF NOT EXISTS citoyen (
-                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                nci VARCHAR(100) NOT NULL UNIQUE,
-                nom VARCHAR(100) NOT NULL,
-                prenom VARCHAR(100) NOT NULL,
-                date_naissance VARCHAR(50),
-                lieu_naissance VARCHAR(100),
-                copie_url VARCHAR(255)
-            );",
-            "CREATE TABLE IF NOT EXISTS recherchelog (
-                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                nci VARCHAR(100) NOT NULL,
-                date_recherche DATETIME DEFAULT CURRENT_TIMESTAMP,
-                ip VARCHAR(100),
-                localisation VARCHAR(255),
-                statut ENUM('Success', 'Échec') NOT NULL
-            );"
+   if ($driver === 'mysql') {
+    $tables = [
+        "CREATE TABLE IF NOT EXISTS citoyen (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            nci VARCHAR(100) NOT NULL UNIQUE,
+            nom VARCHAR(100) NOT NULL,
+            prenom VARCHAR(100) NOT NULL,
+            date_naissance VARCHAR(50) NOT NULL,
+            lieu_naissance VARCHAR(100) NOT NULL,
+            url_carte_recto VARCHAR(255),
+            url_carte_verso VARCHAR(255)
+        );",
+        "CREATE TABLE IF NOT EXISTS recherchelog (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            nci VARCHAR(100) NOT NULL,
+            date_recherche DATETIME NOT NULL,
+            ip VARCHAR(100),
+            localisation VARCHAR(255),
+            statut ENUM('Success', 'Échec') NOT NULL,
+            message TEXT
+        );"
+    ];
+} else {
+    $tables = [
+        "CREATE TABLE IF NOT EXISTS citoyen (
+            id SERIAL PRIMARY KEY,
+            nci VARCHAR(100) NOT NULL UNIQUE,
+            nom VARCHAR(100) NOT NULL,
+            prenom VARCHAR(100) NOT NULL,
+            date_naissance VARCHAR(50) NOT NULL,
+            lieu_naissance VARCHAR(100) NOT NULL,
+            url_carte_recto VARCHAR(255),
+            url_carte_verso VARCHAR(255)
+        );",
+        "CREATE TABLE IF NOT EXISTS recherchelog (
+            id SERIAL PRIMARY KEY,
+            nci VARCHAR(100) NOT NULL,
+            date_recherche TIMESTAMP NOT NULL,
+            ip VARCHAR(100),
+            localisation VARCHAR(255),
+            statut VARCHAR(20) CHECK (statut IN ('Success', 'Échec')) NOT NULL,
+            message TEXT
+        );"
+    ];
+}
 
-        ];
-    } else {
-        // $pdo->exec("DO $$
-        // BEGIN
-        //     IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'transaction_type') THEN
-        //         CREATE TYPE transaction_type AS ENUM ('depot', 'retrait', 'transfert');
-        //     END IF;
-        // END$$;");
-
-        $tables = [
-                "CREATE TABLE IF NOT EXISTS citoyen (
-                id SERIAL PRIMARY KEY,
-                nci VARCHAR(100) NOT NULL UNIQUE,
-                nom VARCHAR(100) NOT NULL,
-                prenom VARCHAR(100) NOT NULL,
-                date_naissance VARCHAR(50),
-                lieu_naissance VARCHAR(100),
-                copie_url VARCHAR(255)
-            );",
-            "CREATE TABLE IF NOT EXISTS recherchelog (
-                id SERIAL PRIMARY KEY,
-                nci VARCHAR(100) NOT NULL,
-                date_recherche TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                ip VARCHAR(100),
-                localisation VARCHAR(255),
-                statut VARCHAR(20) CHECK (statut IN ('Success', 'Échec')) NOT NULL
-            );"
-
-        ];
-    }
 
     foreach ($tables as $sql) {
         $pdo->exec($sql);
