@@ -28,7 +28,7 @@ class Database
 
                 self::$connection = new PDO(
                        'pgsql:host=shortline.proxy.rlwy.net;port=19227;dbname=railway', 'postgres', 'vUIXcPBjYNpYADpYjOZVdrgVPewbWHiO',
-                    //'pgsql:host=postgres_appdaf;port=5432;dbname=appdaf_db', 'appdaf_user', 'secretpass',                     
+                    // 'pgsql:host=postgres_appdaf;port=5432;dbname=appdaf_db', 'appdaf_user', 'secretpass',                     
 
                     [
                         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
