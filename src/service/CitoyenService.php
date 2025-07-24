@@ -2,13 +2,14 @@
 
 namespace App\src\service;
 
-use App\src\repository\CitoyenRepository;
+use App\src\repository\IcitoyenRepository;
 use App\src\entity\Citoyen;
 
 class CitoyenService implements IserviceCitoyen
-{private $citoyenRepository;
+{
+    private  IcitoyenRepository $citoyenRepository;
 
-    public function __construct(CitoyenRepository $citoyenRepository)
+    public function __construct(IcitoyenRepository $citoyenRepository)
     {
         $this->citoyenRepository = $citoyenRepository;
     }

@@ -18,8 +18,16 @@ class Database
     {
         if (self::$connection === null) {
             try {
+//                 DB_DRIVER=pgsql
+// DB_HOST=shortline.proxy.rlwy.net
+// DB_PORT=19227
+// DB_NAME=railway
+// DB_USER=postgres
+// DB_PASSWORD=vUIXcPBjYNpYADpYjOZVdrgVPewbWHiO
+// ROUTE_WEB=http://localhost:8000/
+
                 self::$connection = new PDO(
-                       'pgsql:host=dpg-d1v73m6r433s73fe0a3g-a.oregon-postgres.render.com;port=5432;dbname=postgres_biin', 'postgres_biin_user', 'f3cOaIs9MHpE5F9YG0oVNV98YgMpyuWk',
+                       'pgsql:host=shortline.proxy.rlwy.net;port=19227;dbname=railway', 'postgres', 'vUIXcPBjYNpYADpYjOZVdrgVPewbWHiO',
                     //'pgsql:host=postgres_appdaf;port=5432;dbname=appdaf_db', 'appdaf_user', 'secretpass',                     
 
                     [

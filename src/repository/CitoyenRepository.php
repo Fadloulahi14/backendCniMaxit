@@ -6,7 +6,7 @@ use App\config\Database;
 use App\src\entity\Citoyen;
 use PDO;
 
-class CitoyenRepository
+class CitoyenRepository implements IcitoyenRepository
 {
     private PDO $pdo;
 
@@ -32,6 +32,7 @@ class CitoyenRepository
         $sql = "SELECT * FROM citoyen";
             $stmt = $this->pdo->query($sql);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
 
             return array_map(fn($item) => Citoyen::toObject($item), $data);
         }
