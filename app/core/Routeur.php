@@ -15,7 +15,7 @@ class Routeur{
                 if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
                     $controllerClass = $routeInfo['controller'];
                     $method = $routeInfo['method'];
-                    $controller = new $controllerClass();
+                    $controller = App::getDependency($controllerClass);
                     $controller->$method($matches[1]);
                     return;
                 }

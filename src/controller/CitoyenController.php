@@ -9,11 +9,11 @@ class CitoyenController implements IcontrollerCitoyen
 {
     private CitoyenService $citoyenService;
 
-    public function __construct(CitoyenService $citoyenService)
+    public function __construct(CitoyenService $citoyenService )
     {
 
         $this->citoyenService = $citoyenService;
-        
+
     }
 
     public function findByNci(string $nci): void
